@@ -355,8 +355,8 @@ router.get('/batch/create', function (req, res) {
         database: 'pharmacy'
     });
 
-    var medicineName = "SELECT * FROM Medicine_Information";
-    var supplier = "SELECT * FROM Supplier";
+    var medicineName = "SELECT * FROM medicine_information";
+    var supplier = "SELECT * FROM supplier";
     async.parallel([
         function (callback) {
             connection.query(medicineName, callback)
@@ -404,8 +404,8 @@ router.post('/batch/create', function (req, res) {
                 database: 'pharmacy'
             });
 
-            var medicineName = "SELECT * FROM Medicine_Information";
-            var supplier = "SELECT * FROM Supplier";
+            var medicineName = "SELECT * FROM medicine_information";
+            var supplier = "SELECT * FROM supplier";
             async.parallel([
                 function (callback) {
                     connection.query(medicineName, callback)
@@ -438,7 +438,7 @@ router.post('/batch/create', function (req, res) {
                 Supplier_ID: req.body.supplier_name
             };
             console.log(batch);
-            var query = "INSERT INTO Batch SET ?";
+            var query = "INSERT INTO batch SET ?";
             db.getData(query, [batch], function (rows) {
                 console.log(rows);
                 res.redirect('/admin/batch');
