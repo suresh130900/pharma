@@ -414,6 +414,7 @@ router.post('/batch/create', function (req, res) {
                     connection.query(supplier, callback)
                 }
             ], function (err, rows) {
+                //console.log(rows[1][0]);
                 //console.log(RowDataPacket);
                 res.render('batch_create', {
                     medicinename: rows[0][0],
@@ -437,9 +438,12 @@ router.post('/batch/create', function (req, res) {
                 Medicine_ID: req.body.medicine_name,
                 Supplier_ID: req.body.supplier_name
             };
+
+            console.log("Inserting into batch");
             console.log(batch);
-            var query = "INSERT INTO batch SET ?";
-            db.getData(query, [batch], function (rows) {
+            var insert_batch_query = "INSERT INTO batch SET ?";
+            db.getData(insert_batch_query, [batch], function (rows) {
+                console.log("Insertion successfull");
                 console.log(rows);
                 res.redirect('/admin/batch');
             });
